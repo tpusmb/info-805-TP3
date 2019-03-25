@@ -37,6 +37,7 @@
 <script src="three.js"></script>
 
 <script src="js/libs/inflate.min.js"></script>
+<script src="js/loaders/TGALoader.js"></script>
 <script src="js/loaders/FBXLoader.js"></script>
 
 <script src="js/controls/OrbitControls.js"></script>
@@ -123,7 +124,7 @@
                 }
 
             } );
-
+            object.scale.set(50, 50, 50);
             scene.add( object );
 
         } );
