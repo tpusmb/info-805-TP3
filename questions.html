@@ -40,6 +40,10 @@
                 antialias: true } );
             // Set the viewport size
             renderer.setSize( canvas.width, canvas.height );
+            // Enable shadow
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap; // (default: THREE.PCFShadowMap)
+
             // Create a new Three.js scene
             solarSystem = new THREE.Scene();
             earthGroup = new THREE.Group();
@@ -78,6 +82,8 @@
             let earthMaterial = new THREE.MeshPhongMaterial({ map:earthMap });
             let earthGeometry = new THREE.SphereGeometry(0.5, 52, 52);
             earth = new THREE.Mesh(earthGeometry, earthMaterial);
+            earth.castShadow = true;
+            earth.receiveShadow = true;
             earth.position.z = -6;
             earth.position.x = -2;
 
@@ -87,10 +93,17 @@
             let moonMaterial = new THREE.MeshPhongMaterial({ map:moonMap });
             let moonGeometry = new THREE.SphereGeometry(0.2, 52, 52);
             moon = new THREE.Mesh(moonGeometry, moonMaterial);
+            moon.castShadow = true;
+            moon.receiveShadow = true;
             moon.position.z = -2;
 
-            // Add a white point light at the sun position
+            // Add a light at the sun position
             light = new THREE.PointLight( 0xffffff, 1.5);
+            light.castShadow = true;
+            light.shadow.mapSize.width = 512;  // default
+            light.shadow.mapSize.height = 512; // default
+            light.shadow.camera.near = 0.5;    // default
+            light.shadow.camera.far = 50;
             light.position.x = sun.position.x;
             light.position.y = sun.position.y;
             light.position.z = sun.position.z;
