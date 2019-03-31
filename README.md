@@ -1,11 +1,6 @@
 # Info-805-TP3
 BLANC Swan & LE BRAS Clément
 
-## Système solaire
-
-TODO
-
-
 ## Particles-Tunnel
 
 Ce programme a pour but de simuler un tunnel en 3D avec des particules qui circulent a l'intèrieur.
