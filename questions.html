@@ -51,6 +51,19 @@
             camera.position.z = 10;
 
 
+            // Add background
+            var path = "images/MilkyWay/";
+            var format = '.jpg';
+            var urls = [
+                path + 'posx' + format, path + 'negx' + format,
+                path + 'posy' + format, path + 'negy' + format,
+                path + 'posz' + format, path + 'negz' + format
+            ];
+            var textureCube = new THREE.CubeTextureLoader().load( urls );
+            textureCube.format = THREE.RGBFormat;
+            solarSystem.background = textureCube;
+
+
             // Create a texture-mapped sun
             let sunMapUrl = "images/2k_sun.jpg";
             let sunMap    = new THREE.TextureLoader().load( sunMapUrl );
