@@ -1,5 +1,8 @@
 Avancement:
 
+Part 2: Lancer questions.html
+Part 3: Lancer particles-tunnel.html
+
 2.1: terminée
 2.2: terminée
 2.3: terminée (augementer la valeur de "speedMultiplier" pour accélérer le système solaire)
