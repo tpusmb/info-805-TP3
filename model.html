@@ -106,7 +106,7 @@
 
         // model
         var loader = new THREE.FBXLoader();
-        loader.load( 'models/fbx/silly_dancing.fbx', function ( object ) {
+        loader.load( 'models/fbx/Samba Dancing.fbx', function ( object ) {
 
             mixer = new THREE.AnimationMixer( object );
 
@@ -119,11 +119,10 @@
 
                     child.castShadow = true;
                     child.receiveShadow = true;
-
                 }
 
             } );
-
+            object.scale.set(1, 1, 1);
             scene.add( object );
 
         } );
