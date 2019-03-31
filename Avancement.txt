@@ -1,0 +1,10 @@
+Avancement:
+
+2.1: terminée
+2.2: terminée
+2.3: terminée (augementer la valeur de "speedMultiplier" pour accélérer le système solaire)
+2.4: terminée
+2.5: terminée (mettre la variable "orbitCamera" à true)
+2.6: terminée (on utilise MilkyWay)
+2.7: terminée
+
