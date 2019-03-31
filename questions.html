@@ -17,7 +17,7 @@
         var renderer = null;
         var camera   = null;
         var controls = null;
-        var orbitCamera = false;
+        var orbitCamera = false; // set it to true to make the camera point to the Earth
         var solarSystem = null;
         var earthGroup = null;
         var moonGroup = null;
@@ -27,7 +27,7 @@
         var light    = null;
         var curTime  = Date.now();
 
-        var speedMultiplier = 2;
+        var speedMultiplier = 2; // solar system speed
 
         // This function is called whenever the document is loaded
         function init() {
@@ -76,7 +76,7 @@
             sun = new THREE.Mesh(sunGeometry, sunMaterial);
             sun.position.z = -5;
 
-            // Earth
+            // Create Earth
             let earthMapUrl = "images/earth_atmos_2048.jpg";
             let earthMap = new THREE.TextureLoader().load( earthMapUrl );
             let earthMaterial = new THREE.MeshPhongMaterial({ map:earthMap });
@@ -87,7 +87,7 @@
             earth.position.z = -6;
             earth.position.x = -2;
 
-            // Moon
+            // Create the moon
             let moonMapUrl = "images/moon_1024.jpg";
             let moonMap = new THREE.TextureLoader().load( moonMapUrl );
             let moonMaterial = new THREE.MeshPhongMaterial({ map:moonMap });
@@ -109,7 +109,7 @@
             light.position.z = sun.position.z;
             solarSystem.add( light );
 
-            // groups settings
+            // Set groups
             earthGroup.position.set(sun.position.x, sun.position.y, sun.position.z);
             moonGroup.position.set(earth.position.x, earth.position.y, earth.position.z);
 
