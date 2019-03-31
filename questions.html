@@ -17,6 +17,7 @@
         var renderer = null;
         var camera   = null;
         var controls = null;
+        var orbitCamera = false;
         var solarSystem = null;
         var earthGroup = null;
         var moonGroup = null;
@@ -56,7 +57,7 @@
             let sunMaterial = new THREE.MeshBasicMaterial({ map:sunMap });
             let sunGeometry = new THREE.SphereGeometry(1, 52, 52);
             sun = new THREE.Mesh(sunGeometry, sunMaterial);
-            sun.position.z = -10;
+            sun.position.z = -5;
 
             // Earth
             let earthMapUrl = "images/earth_atmos_2048.jpg";
@@ -64,7 +65,7 @@
             let earthMaterial = new THREE.MeshPhongMaterial({ map:earthMap });
             let earthGeometry = new THREE.SphereGeometry(0.5, 52, 52);
             earth = new THREE.Mesh(earthGeometry, earthMaterial);
-            earth.position.z = -8;
+            earth.position.z = -6;
             earth.position.x = -2;
 
             // Moon
@@ -73,7 +74,7 @@
             let moonMaterial = new THREE.MeshPhongMaterial({ map:moonMap });
             let moonGeometry = new THREE.SphereGeometry(0.2, 52, 52);
             moon = new THREE.Mesh(moonGeometry, moonMaterial);
-            moon.position.z = -3;
+            moon.position.z = -2;
 
             // Add a white point light at the sun position
             light = new THREE.PointLight( 0xffffff, 1.5);
@@ -96,14 +97,15 @@
             // To control our camera
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.addEventListener('change', render); // call this only in static scenes (i.e., if there is no animation loop)
-            controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-            controls.dampingFactor = 0.25;
+            if(!orbitCamera)
+                controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+                controls.dampingFactor = 0.25;
             controls.screenSpacePanning = false;
             controls.minDistance = earth.geometry.parameters.radius;
-            //controls.autoRotate = rotateCamera;
-            controls.maxDistance = 20;
-            /*controls.distance = (controls.minDistance + controls.maxDistance) / 2;
-            controls.target.setFromMatrixPosition(earthMesh.matrixWorld);*/
+            controls.maxDistance = 30;
+            controls.distance = (controls.minDistance + controls.maxDistance) * 0.5;
+            controls.autoRotate = orbitCamera;
+            controls.target.setFromMatrixPosition(earth.matrixWorld);
         }
 
         // This function is called regularly to update the canvas webgl.
@@ -142,6 +144,9 @@
             moon.rotation.y       += (angle / 28) * speedMultiplier; // et en 28 jours aussi sur elle-même pour faire face à la terre*/
 
             //camera.lookAt( earth.matrixWorld.getPosition() );
+            let earthPosition = new THREE.Vector3();
+            earthPosition.setFromMatrixPosition(earth.matrixWorld);
+            controls.target = earthPosition;
             controls.update();
         }
 
